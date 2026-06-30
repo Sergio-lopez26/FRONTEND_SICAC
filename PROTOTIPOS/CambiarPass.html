@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesRecuperarPass.css">
+    <link rel="icon" type="image/x-icon" href="LogoIcono.png">
+    <title>Cambio</title>
+</head>
+<body>
+    <div>
+        <img id="logo" src="logo.png" alt="Logo">
+    </div>
+    <header>
+        <h1>Cambiar Contraseña</h1>
+        <h6>Estimado Usuario, por sus seguridad, le solicitamos reallizar el cambio de su contraseña</h6>
+    </header>
+    <form id="cambiarPass" action="" method="post">
+        <div class="mb-3">
+            <label for="password" class="form-label d-block mb-3">Digite su nueva contraseña
+            <input type="password" name="password" id="password" placeholder="********" class="form-control" style="border: 2px solid #d0e2ff; border-radius: 12px;" required>
+            </label>
+
+            <label for="nPassword" class="form-label d-block mb-3">Confirme su nueva contraseña
+            <input type="password" name="nPassword" id="nPassword" placeholder="********" class="form-control" style="border: 2px solid #d0e2ff; border-radius: 12px;" required>
+            </label>
+        </div>
+
+        <div class="d-flex w-100 gap-3 mt-4">
+            <button id="btnConfirmar" type="submit" class="btn btn-success flex-fill py-2">Confirmar</button>
+            <button id="btnCancelar" type="button" class="btn btn-secondary flex-fill py-2" onclick="cancelar()">Cancelar</button>
+        </div>
+    </form>
+
+    <div class="modal fade" id="precaucion" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 380px;">
+            <div class="modal-content text-center border-0 p-4" style="border-radius: 16px;">
+            
+            <h4 class="text-danger fw-bold mb-3">¡Precaución!</h4>
+            
+            <p class="text-muted mb-4">Estimado Usuarios. La contraseña debe tener mínimo 8 caractéres</p>
+            
+            <button type="button" class="btn btn-primary w-100 py-2" data-bs-dismiss="modal" id="btnCerrarP" style="border-radius: 12px;">
+                Aceptar
+            </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="noCoincide" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 380px;">
+            <div class="modal-content text-center border-0 p-4" style="border-radius: 16px;">
+            
+            <h4 class="text-warning fw-bold mb-3">¡Precaución!</h4>
+            
+            <p class="text-muted mb-4">Estimado Usuarios. La confirmación de la contraseña no coincide</p>
+            
+            <button type="button" class="btn btn-primary w-100 py-2" data-bs-dismiss="modal" id="btnCerrarNC" style="border-radius: 12px;">
+                Aceptar
+            </button>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exito" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 380px;">
+            <div class="modal-content text-center border-0 p-4" style="border-radius: 16px;">
+            
+            <h4 class="text-success fw-bold mb-3">¡Cambio Exitoso!</h4>
+            
+            <p class="text-muted mb-4">Estimado Usuarios. Su contraseña ha sido actualizada en el sistema</p>
+            
+            <button type="button" class="btn btn-primary w-100 py-2" data-bs-dismiss="modal" id="btnExito" style="border-radius: 12px;">
+                Ir a Login
+            </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            const cambiarPass = document.getElementById("cambiarPass");
+            
+            cambiarPass.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const pass = document.getElementById("password").value;
+                const valida = document.getElementById("nPassword").value;
+
+                if(pass.length < 8){
+                    const precaucion = new bootstrap.Modal(document.getElementById('precaucion'));
+                    precaucion.show();
+
+                    document.getElementById("password").style.border = "2px solid red";
+                    return;
+                }
+                if (pass !== valida){
+                    const noCoincide = new bootstrap.Modal(document.getElementById('noCoincide'));
+                    noCoincide.show();
+
+                    document.getElementById("password").focus();
+                }
+                else{
+                    const exito = new bootstrap.Modal(document.getElementById('exito'));
+                    exito.show();
+                }
+            });
+
+            document.getElementById("btnCerrarNC").addEventListener("click", () => {
+                cambiarPass.reset();
+            });
+
+            document.getElementById("btnExito").addEventListener("click", () => {
+                window.location.href = "Login.html"
+            });
+        });
+
+        function cancelar(){
+            document.querySelector("form").reset();
+            window.location.href="Login.html";
+        }
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
