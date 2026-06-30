@@ -103,3 +103,4 @@ A través de este proyecto se propone implementar un sistema de información que
 El alcance definido responde directamente a las problemáticas identificadas durante el análisis inicial y se ajusta a las capacidades técnicas del equipo desarrollador, garantizando la viabilidad del proyecto dentro del tiempo estipulado y del contexto académico del programa ADSO. Además, contribuye al desarrollo de competencias profesionales mediante la aplicación de metodologías de análisis, diseño y desarrollo de software en un caso real.
 </p>
 
+
